@@ -1,10 +1,10 @@
 import Rebase from 're-base';
 
 export const firebase = Rebase.createClass({
-    apiKey: "AIzaSyAlZ73daEohcIL5ONW9_PlCNhK2syqf-Nw",
-    authDomain: "logintest-6a46c.firebaseapp.com",
-    databaseURL: "https://logintest-6a46c.firebaseio.com/",
-    //storageBucket: "qwales1-test.appspot.com",
+    apiKey: "AIzaSyAhVXAL_KEa014DtmgTz0ylHiGfjmy1oEs",
+    authDomain: "vsfire-588df.firebaseapp.com",
+    databaseURL: "https://vsfire-588df.firebaseio.com/",
+    storageBucket: "gs://vsfire-588df.appspot.com"
 });
 
 
