@@ -1,60 +1,23 @@
-var path = require('path');
-var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: __dirname + '/src/index.html',
+  filename: 'index.html',
+  inject: 'body'
+})
 
-var PATHS = {
-  src: path.join(__dirname, 'src'),
-  scenes: path.join(__dirname, 'src/containers'),
-  dist: path.join(__dirname, 'dist')
+module.exports = {
+   devtool: 'inline-source-map',
+   entry: [
+     './src/index.js'
+   ],
+   output: {
+     path: __dirname + '/dist',
+     filename: 'bundle.js'     
+   },
+   module: {
+     loaders: [
+       { test: /\.js$/, loader: 'babel-loader', exclude: [/node_modules/]  }
+      ]
+   },
+   plugins: [HtmlWebpackPluginConfig]
 };
-
-var config = {
-  devtool: 'inline-source-map',
-
-  entry: PATHS.src + '/index.jsx',
-
-  output: {
-    path: PATHS.dist,
-    filename: "bundle.js"
-  },
-
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
-
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel'
-      },
-      {
-        test: /\.css$/,
-        loader: 'style!css?modules!postcss'
-      }
-    ]
-  },
-
-  postcss: [
-    require('autoprefixer')
-  ],
-
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: PATHS.src + '/index.tmpl.html',
-      inject: 'body',
-      filename: 'index.html',
-      title: 'My PhoneBook App',
-    })
-  ],
-
-  devServer: {
-    contentBase: PATHS.dist,
-    colors: true,
-    inline: true,
-    historyApiFallback: true
-  }
-}
-
-module.exports = config;
