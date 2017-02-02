@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactRouter from 'react-router';
 
-export default class Dashboard extends React.Component {
+export default class Home extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -11,7 +11,7 @@ export default class Dashboard extends React.Component {
         return (                            
                 <div className='row'>
                     <div className="col m12 center-align">
-                        DASHBOARD COMPONENT
+                        HOME COMPONENT
                     </div>
                 </div>
             
