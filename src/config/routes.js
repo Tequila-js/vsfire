@@ -4,6 +4,7 @@ import Login from '../containers/Login';
 import App from '../containers/App';
 import Home from '../containers/Home';
 import Test from '../containers/Test';
+import NotFound from '../containers/NotFound';
 import Rebase from 're-base';
 import { firebase } from '../services/firebaseService';
 
@@ -23,6 +24,7 @@ export const routes = (
         <Route path='/' component={App} onEnter={isLoggedIn}>
             <IndexRoute component={Home} />
             <Route path='test' component={Test} />
+            <Route path="*" component={NotFound} />            
         </Route>
     </Router>
 );

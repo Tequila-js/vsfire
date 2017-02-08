@@ -13,7 +13,7 @@ export default class App extends React.Component {
     }
 
     componentDidMount() {
-        getCurrentUser().then((user) => { this.setState({ user: user }) });
+        getCurrentUser().then((user) => {this.setState({ user: user }) });
     }
 
     handleLogout(e) {

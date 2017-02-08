@@ -29,3 +29,16 @@ export const getCurrentUser = function () {
 export const firebaseLogout = function () {
     firebase.unauth();
 }
+
+export const firebaseFetch = function (collection, context, asArray = true, queryOptions = {}) {    
+    return firebase.fetch( collection, {
+            context: context,
+            asArray: asArray,
+            queryOptions: queryOptions
+        }
+    )
+}
+
+export const firebasePost = function (endpoint, object){
+    return firebase.post(endpoint, object);
+}
