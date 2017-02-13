@@ -1,59 +1,76 @@
 import React, { Component } from 'react';
 import Rebase from 're-base';
+import { firebaseFetch } from '../../services/firebaseService';
+import { Button, Row, Col} from  'react-materialize';
 
-const base = Rebase.createClass({
-    apiKey: "AIzaSyAhVXAL_KEa014DtmgTz0ylHiGfjmy1oEs",
-    authDomain: "vsfire-588df.firebaseapp.com",
-    databaseURL: "https://vsfire-588df.firebaseio.com/",
-    //storageBucket: "qwales1-test.appspot.com",
-});
-
-const styles = {
-  userLi: {
-    display: 'inline-block'
-  },
-  userImg: {
-    border: '3px solid #FFF',
-    borderRadius: '3em',
-    margin: '5px'
-  }
-}
 class Users extends Component {
   constructor(props){
     super(props);
     this.state = {
       userData: [],
-      userCount: 0
+      userData_ops: [],
+      userCount: 0,
+      searchTerm: ''
     };
+    this.userData_filter = [];
+    this.mainUser = null;
   }
-  getUsers(){
-    base.fetch('users', {
-      context: this,
-      asArray: true,
-      then(data){
-        this.setState({userData: data, userCount: data.length});
+  reducer(userData_reduced, userData, index){
+      let userData_uppercase;
+      if(this.mainUser.uid !== userData.key){
+          userData_reduced.push(userData);
       }
-    });
+      return userData_reduced;
+  }
+  handleChangeSearch(event) {
+      this.setState({searchTerm: event.target.value.toUpperCase()})
   }
   componentDidMount(){
-    this.getUsers();
+    firebaseFetch('users', this, true)
+        .then(data => {
+            this.setState({userData: data, userCount: data.length});
+            this.setState({userData_ops: this.state.userData.reduce(this.reducer.bind(this), this.userData_filter)});
+        })
+        .catch(error => {
+            console.error(error + " Couldn't fetch the data.");
+        })
   }
   render(){
+    this.mainUser = this.props.user;
     return(
-      <ul>
-        {
-          this.state.userData
-          .map((data, i) =>
-            <li
-              key={i}
-              style={styles.userLi}>
-              <img
-                src={data.picture.medium}
-                alt={data.name.first}
-                style={styles.userImg}/>
-            </li>)
-        }
-      </ul>
+        <Row>
+          <Row>
+            <Col s={9}>
+              <input type="text" name="search-user" placeholder="Search User" id="search" value={this.state.searchTerm}  onChange={this.handleChangeSearch.bind(this)}/>
+            </Col>
+            <Col s={3}>
+              <Button floating large className='blue' waves='light' icon='add' />
+            </Col>
+          </Row>
+          <Row>
+            <Col s={12}>
+                <ul>
+                  {
+                    this.state.userData_ops
+                    .map((data, i) => {
+                        if(data.displayName.toUpperCase().search(this.state.searchTerm) !== -1){
+                            return <li
+                                key={i}
+                                className="users-li">
+                                <a href="#">
+                                    <img
+                                    src={data.photoURL}
+                                    alt={data.displayName}/>
+                                <span className="users-name-label">{data.displayName}</span>
+                                </a>
+                            </li>
+                        }
+                    })
+                  }
+                </ul>
+            </Col>
+          </Row>
+        </Row>
     );
   }
 }

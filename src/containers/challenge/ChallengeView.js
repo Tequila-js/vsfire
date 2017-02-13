@@ -1,36 +1,8 @@
 import React, { Component } from 'react';
-import ContentUser from './ContentUser';
+import Users from './Users';
 import { Modal, Button, Row, Col} from  'react-materialize';
 import Link from 'react-router';
-require ('./main.css');
-
-const styles = {
-  imgCircle: {
-    width: '100%',
-  },
-  imgContainer: {
-    border: '3px solid #fff',
-    borderRadius: '5em',
-    width: '156px',
-    height: '156px',
-    overflow: 'hidden',
-    margin: '0 auto'
-  },
-  txtCenter: {
-    textAlign: 'center'
-  },
-  modal: {
-    width: '70%',
-    maxHeight: '90%',
-    textAlign: 'center'
-  },
-  userContainer: {
-    backgroundColor: '#f5f5f5',
-    textAlign: 'center',
-    padding: '30px 20px',
-    border: '1px solid #eee'
-  }
-}
+import './challenge.css';
 
 class ChallengeView extends Component {
   constructor(props) {
@@ -44,12 +16,12 @@ class ChallengeView extends Component {
             trigger={
                 <Button waves='light'>Create Challenge</Button>
             }
-            style={styles.modal}>
-            <Row>
-              <Col s={5} style={styles.userContainer} >
-                <div style={styles.imgContainer} >
+            className="modal">
+            <Row className="row-container">
+              <Col s={5} className="user-container" >
+                <div className="main-user-container" >
                   <img
-                    style={styles.imgCircle}
+                    className="main-user-img"
                     src={this.props.user.photoURL}/>
                 </div>
                 <Row className="user-name">
@@ -58,15 +30,15 @@ class ChallengeView extends Component {
                   </Col>
                 </Row>
               </Col>
-              <Col s={2} style={styles.txtCenter}>
+              <Col s={2} className="txt-center">
                 <div className="vs-hexagon">
                   <span className="vs-hexagon-left"></span>
                   <span className="vs-hexagon-text">VS</span>
                   <span className="vs-hexagon-right"></span>
                 </div>
               </Col>
-              <Col s={5} style={styles.userContainer}>
-                <ContentUser />
+              <Col s={5} className="user-container">
+                <Users user={this.props.user}/>
                   <Row className="user-name">
                     <Col s={12}>
                         <p></p>
@@ -74,6 +46,7 @@ class ChallengeView extends Component {
                   </Row>
               </Col>
             </Row>
+
           </Modal>
     );
   }
