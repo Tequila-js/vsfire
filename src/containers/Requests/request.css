@@ -1,0 +1,54 @@
+.user-img{
+    margin-top: 5px;
+    border-radius: 50%;
+    border: 2px solid #CCC;
+    width: 90px;
+    height: 90px;
+}
+
+.cat{
+    position: absolute;
+    top:0;
+    left: 0;
+    margin: 5px;
+    background-color: #C5C5C5;
+    border-radius:0 5px 5px 0;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 5px 20px;
+    box-shadow: darkgray;
+}
+
+.user-name{
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: darkgray;
+    font-weight: 500;
+}
+
+.comment{
+    border: 1px solid darkgray;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.align-right{
+    text-align: right;
+}
+
+.align-left{
+    text-align: left;
+}
+
+.align-center{
+    text-align: center;
+}
+
+button{
+    text-align: center;
+    width: 100%;
+}
+
+.loader{
+    margin-top: 20%;
+}
