@@ -16,7 +16,6 @@ class Result extends React.Component{
 
 
     handleWin(){
-        console.log('win');
         firebase.update('challenges/'+this.props.challenge.key, {
             data: {
                 status:4,
@@ -30,7 +29,6 @@ class Result extends React.Component{
     }
 
     handleLoss(){
-        console.log('Loss');
         firebase.update('challenges/'+this.props.challenge.key, {
             data: {
                 status:4,

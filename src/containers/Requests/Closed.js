@@ -20,7 +20,6 @@ class Closed extends React.Component{
     componentDidMount(){
         getCurrentUser().then(user => {
             this.setState({me:user});
-            console.log(this.state);
         });
     }
 
