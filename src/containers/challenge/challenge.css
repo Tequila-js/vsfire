@@ -35,6 +35,19 @@
     text-align: center;
     padding: 30px 20px!important;
     border: 1px solid #eee;
+    max-height: 289px;
+    overflow: hidden;
+}
+.row-search {
+    position: fixed;
+    padding: 0 20px;
+    width: 35%;
+    margin-top: -60px;
+}
+.row-users {
+    max-height: 166px;
+    overflow-y: overlay;
+    margin-top: 60px;
 }
 .users-li {
     width: 80px;
@@ -51,8 +64,8 @@
 .users-name-label {
     display: none;
     position: absolute;
-    margin-top: -3.7%;
-    margin-left: -8%;
+    margin-top: -45px;
+    margin-left: -9%;
     background: #656565;
     padding: 5px 25px;
     /*border: 2px solid #ccc;*/
@@ -64,19 +77,19 @@
     content: '';
     width: 0;
     height: 0;
-    position: relative;
-    top: 39px;
-    left: 35px;
+    position: absolute;;
+    top: 110%;
+    left: 42%;
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
-    border-top: 12px solid #656565;
+    border-top: 8px solid #656565;
 }
 .users-li:hover {
     background-color: #000;
     border: 3px solid #ccc;
 }
 .users-li:hover img {
-    opacity: 0.3;
+    opacity: 0.7;
 }
 .users-li:hover .users-name-label {
     display: inline-block;

@@ -39,7 +39,7 @@ class Users extends Component {
     this.mainUser = this.props.user;
     return(
         <Row>
-          <Row>
+          <Row className="row-search">
             <Col s={9}>
               <input type="text" name="search-user" placeholder="Search User" id="search" value={this.state.searchTerm}  onChange={this.handleChangeSearch.bind(this)}/>
             </Col>
@@ -47,28 +47,35 @@ class Users extends Component {
               <Button floating large className='blue' waves='light' icon='add' />
             </Col>
           </Row>
-          <Row>
-            <Col s={12}>
-                <ul>
-                  {
-                    this.state.userData_ops
-                    .map((data, i) => {
-                        if(data.displayName.toUpperCase().search(this.state.searchTerm) !== -1){
-                            return <li
-                                key={i}
-                                className="users-li">
-                                <a href="#">
-                                    <img
-                                    src={data.photoURL}
-                                    alt={data.displayName}/>
-                                <span className="users-name-label">{data.displayName}</span>
-                                </a>
-                            </li>
-                        }
-                    })
-                  }
-                </ul>
-            </Col>
+          <Row className="row-users">
+              <Row>
+                <Col s={12}>
+                    <ul>
+                      {
+                        this.state.userData_ops
+                        .map((data, i) => {
+                            if(data.displayName.toUpperCase().search(this.state.searchTerm) !== -1){
+                                return <li
+                                    key={i}
+                                    className="users-li">
+                                    <a href="#">
+                                        <img
+                                        src={data.photoURL}
+                                        alt={data.displayName}/>
+                                    </a>
+                                    <span className="users-name-label">{data.displayName}</span>
+                                </li>
+                            }
+                        })
+                      }
+                    </ul>
+                </Col>
+                </Row>
+                <Row className="user-name">
+                  <Col s={12}>
+                      <p></p>
+                  </Col>
+                </Row>
           </Row>
         </Row>
     );
