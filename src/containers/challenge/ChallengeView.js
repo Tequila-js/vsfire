@@ -39,13 +39,10 @@ class ChallengeView extends Component {
               </Col>
               <Col s={5} className="user-container">
                 <Users user={this.props.user}/>
-                  <Row className="user-name">
-                    <Col s={12}>
-                        <p></p>
-                    </Col>
-                  </Row>
               </Col>
             </Row>
+
+
 
           </Modal>
     );
