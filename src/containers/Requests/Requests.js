@@ -17,6 +17,7 @@ class Request extends React.Component{
             me:{},
           challenges:[],
             users:[],
+            others:[],
             disciplines:[],
             count:0,
             isLoading:true
@@ -32,7 +33,18 @@ class Request extends React.Component{
                     challenges:challenges
                 });
                 this.state.challenges.forEach(val=>{
-                    let otherUser = val.user1 === this.state.me.uid ? val.user2 : val.user1;
+                    let otherUser = '';
+                    if(val.user1 === this.state.me.uid ){
+                        otherUser = val.user2;
+                    }
+                    if(val.user2 === this.state.me.uid ){
+                        otherUser = val.user1;
+                    }
+
+                    this.setState({
+                        others : this.state.others.concat([otherUser])
+                    });
+
                     firebaseFetch('users/'+otherUser,this,false).then(user=>{
                         let aux = [user];
                         this.setState({
@@ -69,7 +81,6 @@ class Request extends React.Component{
     componentDidMount() {
         getCurrentUser().then(user => {
             this.setState({me:user});
-            console.log(this.state);
         });
         this.getChallenges();
     }
@@ -90,7 +101,7 @@ class Request extends React.Component{
                 <Row>
                     <Col s={12} className="solicitudes-container">
                         {this.state.challenges.map((val,index) => {
-
+                                if(this.state.others[index]!='')
                                 return (
                                         <Solicitude challenge={val} user2={this.state.users[index]} discipline={this.state.disciplines[index]} type={val.type} me={this.state.me} key={index}/>
                                 );

@@ -22,7 +22,6 @@ class Pending extends React.Component{
                 comment:this.state.message
             }
         }).then(() => {
-            console.log(this.state);
             challenge.status = 1;
         }).catch(err => {
             console.log('Error');
