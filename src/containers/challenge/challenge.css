@@ -1,0 +1,162 @@
+.modal {
+    width: 70%;
+    max-height: 90%;
+    text-align: center;
+}
+.row-container {
+    background-color: #fff;
+    padding: 5px;
+}
+.main-user-container {
+    border: 3px solid #fff;
+    border-radius: 5em;
+    width: 156px;
+    height: 156px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.main-user-img {
+    width: 100%;
+}
+.user-name {
+    margin-bottom: 0;
+    margin-top: 25px;
+    background-color: #ccc;
+    border-radius: 1em;
+}
+.user-name p {
+    color: #656565;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 8px 0;
+}
+.user-container {
+    background-color: #f5f5f5;
+    text-align: center;
+    padding: 30px 20px!important;
+    border: 1px solid #eee;
+}
+.users-li {
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    border: 3px solid #fff;
+    border-radius: 5em;
+    margin: 5px;
+    overflow: hidden;
+}
+.users-li img {
+    width: 100%;
+}
+.users-name-label {
+    display: none;
+    position: absolute;
+    margin-top: -3.7%;
+    margin-left: -8%;
+    background: #656565;
+    padding: 5px 25px;
+    /*border: 2px solid #ccc;*/
+    border-radius: 1em;
+    color: #ffffff;
+    box-shadow: 1px 3px 6px #000;
+}
+.users-name-label::before {
+    content: '';
+    width: 0;
+    height: 0;
+    position: relative;
+    top: 39px;
+    left: 35px;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-top: 12px solid #656565;
+}
+.users-li:hover {
+    background-color: #000;
+    border: 3px solid #ccc;
+}
+.users-li:hover img {
+    opacity: 0.3;
+}
+.users-li:hover .users-name-label {
+    display: inline-block;
+}
+.vs-hexagon {
+    width: 80px;
+    height: 100px;
+    background: #f5f5f5;
+    position: relative;
+    margin: 0 auto;
+    box-shadow: 0px 0px 20px #ccc;
+}
+.vs-hexagon::before {
+    content: "";
+    position: absolute;
+    left: -24px;
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    border-right: 25px solid #f5f5f5;
+    z-index: 5;
+}
+.vs-hexagon::after {
+    content: "";
+    position: absolute;
+    left: 80px;
+    width: 0;
+    height: 0;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+    border-left: 25px solid #f5f5f5;
+    z-index: 5;
+}
+.vs-hexagon-text {
+    color: #656565;
+    font-size: 62px;
+    font-weight: 600;
+}
+.vs-hexagon-left {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    background-color: #ccc;
+    left: -65px;
+    top: 30px;
+    box-shadow: -10px 0px 25px #ccc;
+}
+.vs-hexagon-left::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 15px solid #ccc;
+    z-index: 10;
+    left: -15px;
+}
+.vs-hexagon-right {
+    position: absolute;
+    width: 60px;
+    height: 40px;
+    background-color: #ccc;
+    left: 85px;
+    top: 30px;
+    box-shadow: 10px 0px 25px #ccc;
+    z-index: 0;
+}
+.vs-hexagon-right::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 15px solid #ccc;
+    z-index: 10;
+    left: 60px;
+}
+.txt-center {
+    text-align: center;
+}
