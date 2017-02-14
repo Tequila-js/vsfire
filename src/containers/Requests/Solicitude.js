@@ -2,33 +2,71 @@
  * Created by Daniel_Gutierrez on 2/7/2017.
  */
 import React from 'react';
-import { Button, Row, Col, Icon, Card } from 'react-materialize';
+import {firebase,firebaseFetch} from '../../services/firebaseService';
+import { Button, Row, Col, Preloader, Card } from 'react-materialize';
+
+import Pending from './Pending';
+import Result from './Result';
+import Closed from './Closed';
 
 class Solicitude extends React.Component{
+
     constructor(props){
         super(props);
+        this.state = {
+            loading:false
+        };
     }
+
+    getChallengeInfo(){
+
+    }
+
+    componentDidMount(){
+        this.getChallengeInfo();
+    }
+
+    right(){
+        if(this.state.loading){
+
+            return (
+                <Col s={12} className="loader">
+                    <Preloader flashing size='big' />
+                </Col>
+            );
+
+        }else {
+
+            switch(this.props.challenge.status){
+                case 0: return ( <Pending challenge={this.props.challenge} me={this.props.me}/>);
+                    break;
+                case 1: return (<Result challenge={this.props.challenge} user2={this.props.user2} me={this.props.me}/>);
+                    break;
+                case 4: return (<Closed challenge={this.props.challenge} me={this.props.me} />);
+            }
+        }
+    }
+
+
+
     render(){
         return(
-            <Col s={6}>
-                <Card className='blue-grey darken-1' textClassName='white-text' title='Card title' >
+            <Col s={12}>
+                <Card className='darken-1' >
                     <Row>
-                        <Col s={6}>
-                        <span className="cat">
-                            FIFA 17
-                        </span>
-                            <div className="user">
-                                <img src="https://university.mongodb.com/static/images/instructors/mongodb_shaun_verch2.f446c4df52ca.png" alt=""/>
-                            </div>
-                            <p className="user-name">Name</p>
+                        <Col s={4}>
+                            <Row>
+                                <p className="cat">{this.props.discipline}</p>
+                            </Row>
+                            <Row>
+                                <img className="user-img" src={this.props.user2.photoURL} alt=""/>
+                            </Row>
+                            <Row>
+                                <p className="user-name">{this.props.user2.displayName}</p>
+                            </Row>
                         </Col>
-                        <Col s={6}>
-                            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem deleniti, eum hic iure mollitia pariatur quia voluptate? Alias culpa debitis dolorem ex modi, numquam repellat totam ullam velit veniam. </p>
-                            <textarea name="" id="" cols="30" rows="10"></textarea>
-                            <div>
-                                <Button waves='light'>button</Button>
-                                <Button waves='light'>button<Icon right>cloud</Icon></Button>
-                            </div>
+                        <Col s={8}>
+                            {this.right()}
                         </Col>
                     </Row>
                 </Card>
@@ -36,5 +74,10 @@ class Solicitude extends React.Component{
         );
     }
 }
+
+Solicitude.TYPES = {
+    request:1,
+    result:2
+};
 
 export default Solicitude;
