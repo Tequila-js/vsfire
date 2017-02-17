@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Users from './Users';
 import { Modal, Button, Row, Col, Input, Preloader } from 'react-materialize';
 import Link from 'react-router';
-import { firebaseFetch, firebasePost } from '../../services/firebaseService';
+import { firebaseFetch, firebasePush } from '../../services/firebaseService';
 import './challenge.css';
 
 class ChallengeView extends Component {
@@ -14,7 +14,7 @@ class ChallengeView extends Component {
       selectedDiscipline: '',
       comment: '',
       isLoading: false,
-      user:''
+      user: ''
     }
   }
 
@@ -43,23 +43,36 @@ class ChallengeView extends Component {
   sendChallenge() {
     if (this.state.challengedUser !== '') {
       this.setState({ isLoading: true });
-      firebasePost('challenges', {
+      let reference = firebasePush('challenges', {
         data: {
-          sender: this.state.user,
+          sender: this.props.user.uid,
           receiver: this.state.challengedUser,
-          status: 1,
+          status: 0,
           comment: this.state.comment,
           discipline: this.state.selectedDiscipline
         }
-      }).then(() => this.setState({ isLoading: false }))
+      }).then((newChallenge) => {
+        let challengeKey = newChallenge.key;
+        let dataToSave = {}
+        dataToSave[challengeKey] = true;
+        firebasePush('users/' + this.props.user.uid + '/challenges', { data: dataToSave })
+        firebasePush('users/' + this.state.challengedUser + '/challenges', { data: dataToSave })        
+      });
+      $('.modal').modal('close');
+      this.setState({ 
+        isLoading: false,
+        challengedUser: '',
+        selectedDiscipline: '',
+        comment: '',
+      })
     } else {
-      console.log('mensaje de error');
+
     }
   }
 
   render() {
     let layout;
-    if (this.state.isLoading) {      
+    if (this.state.isLoading) {
       layout = (
         <Col s={12} className="loader">
           <Preloader flashing size='big' />
@@ -111,6 +124,10 @@ class ChallengeView extends Component {
       )
     }
 
+    let options = {
+      dismissible: false,
+    }
+
     return (
       <Modal
         header='Select Match'
@@ -123,8 +140,8 @@ class ChallengeView extends Component {
             <Button waves='light' className="teal" onClick={this.sendChallenge.bind(this)}>Send Challenge</Button>
           ]
         }
-        className="modal">        
-          {layout}        
+        modalOptions={options}>
+        {layout}
       </Modal>
     );
   }

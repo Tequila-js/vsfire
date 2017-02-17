@@ -65,9 +65,6 @@
     margin: 5px;
     overflow: hidden;
 }
-ul:not(.browser-default) {
-    display: inline-block;
-}
 .users-li img {
     width: 100%;
 }

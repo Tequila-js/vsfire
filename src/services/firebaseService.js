@@ -42,3 +42,7 @@ export const firebaseFetch = function (collection, context, asArray = true, quer
 export const firebasePost = function (endpoint, object){
     return firebase.post(endpoint, object);
 }
+
+export const firebasePush = function (endpoint, object){
+    return firebase.push(endpoint, object);
+}
