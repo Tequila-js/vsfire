@@ -1,3 +1,18 @@
+nav {
+    padding: 0px 45px;
+}
+nav img {
+    width: 120px;
+    padding: 3.5px 6px;
+}
+@media only screen and (max-width: 992px) {
+    nav img {
+        width: 104px;
+    }
+    nav {
+        padding: 0 10px;
+    }
+}
 .transition-group {
   position: relative;
   flex-grow: 1;
@@ -30,7 +45,36 @@
 .page-leave.page-leave-active {
   opacity: 0;
 }
-
 .z-index {
   z-index: 1;
+}
+/*Home*/
+.section-create-challenge {
+    height: 400px;
+    padding: 90px!important;
+    background: url('../img/main-background.jpg') no-repeat 0;
+    background-size: cover;
+}
+.section-create-challenge .row, .section-create-challenge .col, .section-create-challenge img {
+    height: 100%;
+}
+.home-title {
+    margin-bottom: 0;
+    text-shadow: 3px 3px 4px #FFF;
+}
+.home-subtitle {
+    margin-top: 0;
+    font-size: 25px;
+    color: #555;
+    text-shadow: 3px 3px 4px #FFF;
+}
+/*GENERAL*/
+.padding-0 {
+    padding: 0!important;
+}
+.txt-left {
+    text-align: left;
+}
+.txt-right {
+    text-align: right;
 }
