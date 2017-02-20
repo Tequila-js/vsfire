@@ -57,7 +57,7 @@ class Users extends Component {
             this.setState({userData_ops: this.state.userData.reduce(this.reducer.bind(this), this.userData_filter)});
         })
         .catch(error => {
-            console.error(error + " Couldn't fetch the data.");
+            console.error(error + ". Couldn't fetch the data.");
         })
   }
   render(){
@@ -73,7 +73,7 @@ class Users extends Component {
                   <input type="text" name="search-user" placeholder="Search User" id="search" value={this.state.searchTerm} placeholder={this.state.onHoverUserData} onChange={this.onChangeSearch.bind(this)}/>
                 </Col>
                 <Col s={3}>
-                  <Button floating large className='blue' waves='light' disabled={!this.state.userChallenged.displayName} icon='&#x2714;' onClick={this.onClickSelection.bind(this)}/>
+                  <Button floating large className='blue' waves='light' disabled={!this.state.userChallenged.displayName} icon='done' onClick={this.onClickSelection.bind(this)}/>
                 </Col>
               </Row>
               <Row className="row-users">

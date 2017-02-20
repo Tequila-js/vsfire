@@ -14,7 +14,7 @@ class ChallengeView extends Component {
             header='Select Match'
             fixedFooter
             trigger={
-                <Button waves='light'>Create Challenge</Button>
+                <Button waves='light' className="red accent-2">Create Challenge</Button>
             }
             className="modal">
             <Row className="row-container">
