@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Users from './Users';
-import { Modal, Button, Row, Col, Input, Preloader } from 'react-materialize';
+import { Collapsible, CollapsibleItem, Button, Row, Col, Input, Preloader } from 'react-materialize';
 import Link from 'react-router';
 import { firebaseFetch, firebasePush } from '../../services/firebaseService';
 import './challenge.css';
@@ -56,15 +56,14 @@ class ChallengeView extends Component {
         let dataToSave = {}
         dataToSave[challengeKey] = true;
         firebasePush('users/' + this.props.user.uid + '/challenges', { data: dataToSave })
-        firebasePush('users/' + this.state.challengedUser + '/challenges', { data: dataToSave })        
+        firebasePush('users/' + this.state.challengedUser + '/challenges', { data: dataToSave })
+        this.setState({
+          isLoading: false,
+          challengedUser: '',
+          selectedDiscipline: '',
+          comment: '',
+        })
       });
-      $('.modal').modal('close');
-      this.setState({ 
-        isLoading: false,
-        challengedUser: '',
-        selectedDiscipline: '',
-        comment: '',
-      })
     } else {
 
     }
@@ -120,29 +119,21 @@ class ChallengeView extends Component {
               </Col>
             </Col>
           </Row>
+          <Row>
+            <Col m={4} className="txt-center offset-m8">
+              <Button waves='light' onClick={this.sendChallenge.bind(this)}>Send Challenge</Button>
+            </Col>
+          </Row>
         </Row>
       )
     }
 
-    let options = {
-      dismissible: false,
-    }
-
     return (
-      <Modal
-        header='Select Match'
-        trigger={
-          <Button waves='light'>Create Challenge</Button>
-        }
-        actions={
-          [
-            <Button waves='light' modal='close' flat>Close</Button>,
-            <Button waves='light' className="teal" onClick={this.sendChallenge.bind(this)}>Send Challenge</Button>
-          ]
-        }
-        modalOptions={options}>
-        {layout}
-      </Modal>
+      <Collapsible popout>
+        <CollapsibleItem header='Create Challenge' icon='whatshot'>
+          {layout}
+        </CollapsibleItem>
+      </Collapsible>
     );
   }
 }
