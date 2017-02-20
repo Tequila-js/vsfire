@@ -21,7 +21,6 @@ export default class Home extends React.Component {
                     <Requests/>
                 </Col>
             </Row>
-
         );
     }
 }

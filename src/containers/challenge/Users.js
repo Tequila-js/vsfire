@@ -48,7 +48,8 @@ class Users extends Component {
           //userChallengedName: this.state.userChallenged.displayName,
           userSelection: false,
           userSelected: true
-      });
+      });      
+      this.props.handleSelectedUser(this.state.userChallenged.key);
   }
   componentDidMount(){
     firebaseFetch('users', this, true)

@@ -47,7 +47,6 @@
 .row-search {
     position: fixed;
     padding: 0 20px;
-    width: 35%;
     margin-top: -75px;
 }
 .row-users {
@@ -64,9 +63,6 @@
     border-radius: 5em;
     margin: 5px;
     overflow: hidden;
-}
-ul:not(.browser-default) {
-    display: inline-block;
 }
 .users-li img {
     width: 100%;
