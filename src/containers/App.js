@@ -25,19 +25,23 @@ export default class App extends React.Component {
     render() {
         return (
             <div>
-                <nav>
-                    <Navbar brand='VsFire' right className="nav-wrapper blue accent-3 z-index">
-                        <NavItem href='#' onClick={(e) => this.handleLogout(e)}>Logout</NavItem>
-                    </Navbar>
-                </nav>
-                <Row>
-                    <Col m={12} className="center-align">
+                <nav className="grey darken-4">
+                    <div className="nav-wrapper">
+                      <a href="javascript:;"><img src="../../public/img/VsFire_Logo_simple.png"/></a>
+                      <ul id="nav-mobile" className="right">
+                        <li><a onClick={(e) => this.handleLogout(e)}><Icon>power_settings_new</Icon></a></li>
+                      </ul>
+                    </div>
+                  </nav>
+                <Row className="center-align">
+                    <Col s={12} m={12} className="padding-0">
                         <ReactCSSTransitionGroup
                             component="div"
                             className="transition-group"
                             transitionName="page"
                             transitionEnterTimeout={1000}
                             transitionLeaveTimeout={1000}
+
                             >
                             {React.cloneElement(this.props.children, { user: this.state.user, key: (this.props.location.pathname) })}
                         </ReactCSSTransitionGroup>
