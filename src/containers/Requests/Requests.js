@@ -24,6 +24,36 @@ class Request extends React.Component{
         };
     }
 
+    addDiscipline(discipline){
+        let aux = [discipline];
+        this.setState({
+            disciplines : this.state.disciplines.concat(aux)
+        });
+        this.setState({
+            count:this.state.count + 1
+        });
+        if(this.state.count==this.state.challenges.length*2){
+            this.setState({
+                isLoading:false
+            });
+        }
+    }
+
+    addUser(user){
+        let aux = [user];
+        this.setState({
+            users : this.state.users.concat(aux)
+        });
+        this.setState({
+            count:this.state.count + 1
+        });
+        if(this.state.count==this.state.challenges.length*2){
+            this.setState({
+                isLoading:false
+            });
+        }
+    }
+
     getChallenges(){
         firebase.listenTo('challenges', {
             context: this,
@@ -33,46 +63,32 @@ class Request extends React.Component{
                     challenges:challenges
                 });
                 this.state.challenges.forEach(val=>{
+
                     let otherUser = '';
-                    if(val.user1 === this.state.me.uid ){
-                        otherUser = val.user2;
+
+                    if(val.sender === this.state.me.uid ){
+                        otherUser = val.receiver;
                     }
-                    if(val.user2 === this.state.me.uid ){
-                        otherUser = val.user1;
+                    if(val.receiver === this.state.me.uid ){
+                        otherUser = val.sender;
                     }
 
                     this.setState({
                         others : this.state.others.concat([otherUser])
                     });
 
-                    firebaseFetch('users/'+otherUser,this,false).then(user=>{
-                        let aux = [user];
-                        this.setState({
-                            users : this.state.users.concat(aux)
+                    if(otherUser!=''){
+                        firebaseFetch('users/'+otherUser,this,false).then(user=>{
+                            this.addUser(user);
                         });
-                        this.setState({
-                                count:this.state.count + 1
-                            });
-                        if(this.state.count==this.state.challenges.length*2){
-                            this.setState({
-                                isLoading:false
-                            });
-                        }
-                    });
-                    firebaseFetch('disciplines/'+val.discipline,this,false).then(discipline=>{
-                        let aux = [discipline];
-                        this.setState({
-                            disciplines : this.state.disciplines.concat(aux)
+                        firebaseFetch('disciplines/'+val.discipline,this,false).then(discipline=>{
+                            this.addDiscipline(discipline);
                         });
-                        this.setState({
-                                count:this.state.count + 1
-                            });
-                        if(this.state.count==this.state.challenges.length*2){
-                            this.setState({
-                                isLoading:false
-                            });
-                        }
-                    });
+                    }else{
+                        this.addUser(null);
+                        this.addDiscipline(null);
+                    }
+
                 });
             }
         });
@@ -101,9 +117,9 @@ class Request extends React.Component{
                 <Row>
                     <Col s={12} className="solicitudes-container">
                         {this.state.challenges.map((val,index) => {
-                                if(this.state.others[index]!='')
+                                if(this.state.users[index]!=null)
                                 return (
-                                        <Solicitude challenge={val} user2={this.state.users[index]} discipline={this.state.disciplines[index]} type={val.type} me={this.state.me} key={index}/>
+                                        <Solicitude challenge={val} user2={this.state.users[index]} discipline={this.state.disciplines[index]} me={this.state.me} key={index}/>
                                 );
 
                             }
