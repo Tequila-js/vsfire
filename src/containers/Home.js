@@ -2,10 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactRouter from 'react-router';
 import { Row, Col } from 'react-materialize';
-
 import ChallengeView from './challenge/ChallengeView';
 import Requests from './Requests/Requests';
-import { Navbar, NavItem, Row, Col, Icon } from 'react-materialize';
+
 
 export default class Home extends React.Component {
     constructor(props) {
