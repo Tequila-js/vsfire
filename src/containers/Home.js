@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactRouter from 'react-router';
 import { Row, Col } from 'react-materialize';
+
 import ChallengeView from './challenge/ChallengeView';
 import Requests from './Requests/Requests';
+import { Navbar, NavItem, Row, Col, Icon } from 'react-materialize';
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -12,17 +14,12 @@ export default class Home extends React.Component {
     render() {
         return (
             <Row>
-                <Row>
-                    <Col m={6} className="offset-m3">
-                        <ChallengeView user={this.props.user} />
-                    </Col>
-                </Row>
-                <div className="divider"></div>
-                <Row>
-                    <Col m={6}>
-                        <Requests/>
-                    </Col>
-                </Row>
+                <Col s={12} m={12} className="section-create-challenge">
+                    <h2 className="home-title">START YOUR OWN RECORD</h2>
+                    <p className="home-subtitle">VsFire is your LEADERBOARD.</p>
+                    <ChallengeView user={this.props.user} />
+                    <Requests/>
+                </Col>
             </Row>
         );
     }
